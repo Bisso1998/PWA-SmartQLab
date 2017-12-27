@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="theme-color" content="#008975"/>
+    <title>Login - Smart QLabs</title>
+    <style type="text/css">
+    #fire-container {
+        background: grey;
+        border: black solid;
+    }
+
+
+
+    </style>
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+
+    <link rel="apple-touch-icon" sizes="57x57" href="image/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="image/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="image/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="image/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="image/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="image/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="image/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="image/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="image/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="image/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="image/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="image/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="image/icons/favicon-16x16.png">
+    <link rel="manifest" href="image/icons/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--initalization from firebase code snippest-->
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+    <!-- Compiled and minified CSS -->
+
+    <script>
+    // Initialize Firebase
+    var config = {
+        apiKey: "AIzaSyBr9XlaGm0HONMXSt9bfV6qQgONDxr3gpk",
+        authDomain: "smartqlabs.firebaseapp.com",
+        databaseURL: "https://smartqlabs.firebaseio.com",
+        projectId: "smartqlabs",
+        storageBucket: "smartqlabs.appspot.com",
+        messagingSenderId: "503779783045"
+    };
+    firebase.initializeApp(config);
+    </script>
+    <!--the code below initializes the signin widget from firebaseUI web-->
+    <script src="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/1.0.0/firebaseui.css" />
+    <script type="text/javascript">
+    // FirebaseUI config.
+    var uiConfig = {
+        signInSuccessUrl: 'main.html',
+        signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID
+        ],
+        // Terms of service url.
+        tosUrl: '<your-tos-url>'
+    };
+    // Initialize the FirebaseUI Widget using Firebase.
+    var ui = new firebaseui.auth.AuthUI(firebase.auth());
+    // The start method will wait until the DOM is loaded.
+    ui.start('#firebaseui-auth-container', uiConfig);
+    </script>
+</head>
+<body>
+    <div class="container">
+      <div class="row">
+        <div class="col s4">
+          &nbsp;
+        </div>
+        <div class="col s4">
+          <!-- <div class="cotainer" style="height: 500 px; border: 4px solid black;">
+            &nbsp;
+          </div> -->
+          <img class="materialboxed" src="image/logo_t.png" width="300" height="300">
+          <br><br>
+          <div class="fire-container" >
+              <div id="firebaseui-auth-container"></div>
+          </div>
+        </div>
+        <div class="col s4">
+          &nbsp;
+        </div>
+
+      </div>
+
+      </div>
+    <script type="text/javascript">
+      if (navigator.serviceWorker.controller) {
+        console.log('[PWA Builder] active service worker found, no need to register')
+      } else {
+        //Register the ServiceWorker
+        navigator.serviceWorker.register('pwabuilder-sw.js', {
+          scope: './'
+        }).then(function(reg) {
+          console.log('Service worker has been registered for scope:'+ reg.scope);
+        });
+      }
+    </script>
+</body>
+</html>

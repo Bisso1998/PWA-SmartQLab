@@ -1,0 +1,245 @@
+<html>
+
+<head>
+    <meta name="description" content="QR Code scanner" />
+    <meta name="theme-color" content="#008975"/>
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Scan - Smart QLabs</title>
+
+    <link rel="stylesheet" type="text/css" href="assets/style.css">
+    <link rel="manifest" href="image/icons/manifest.json">
+
+    <!--initalization from firebase code snippest-->
+    <script src="https://www.gstatic.com/firebasejs/4.4.0/firebase.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Anton" rel="stylesheet">
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBr9XlaGm0HONMXSt9bfV6qQgONDxr3gpk",
+        authDomain: "smartqlabs.firebaseapp.com",
+        databaseURL: "https://smartqlabs.firebaseio.com",
+        projectId: "smartqlabs",
+        storageBucket: "smartqlabs.appspot.com",
+        messagingSenderId: "503779783045"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <!-- Compiled and minified CSS -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+    <!-- Google APIs -->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Local APIs -->
+    <script type="text/javascript" src="assets/llqrcode.js"></script>
+    <script type="text/javascript" src="assets/webqr.js"></script>
+    <script type="text/javascript" src="assets/script.js"></script>
+    <script type="text/javascript" src="assets/firebase.js"></script>
+</head>
+<body>
+  <nav style="color: blue">
+      <div class="nav-wrapper" style="color: blue; background-color: #008975;">
+        <a href="#" class="brand-logo" style="font-size: 20px;">SmartQ-Labs</a>
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li><a href="collapsible.html"><i class="material-icons">accessibility</i></a></li>
+          <li><a href="badges.html"><i class="material-icons">arrow_back</i></a></li>\
+        </ul>
+      </div>
+    </nav>
+    <!-- <div class="card-image" id="user-image"> -->
+  <div class="container  center-align" >
+    <div class="row">
+        <div class="col s12 m6">
+          <div class="card darken-1" style="background-color: #00BF9A">
+            <div class="card-content white-text">
+              <div class=" materialboxed center-align"   data-caption="A picture of a way with a group of trees in a park" width="250" id="user-image">
+                <br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+</div>
+    <!-- <div class="container">
+      <div class="col s12 m7">
+      <h2 class="header">Horizontal Card</h2>
+      <div class="card horizontal small">
+        <div class="card-image">
+        </div>
+        <div class="card-stacked">
+          <div class="card-content">
+            <p>I am a very simple card. I am good at containing small bits of information.</p>
+          </div>
+          <div class="card-action">
+            <a href="#">This is a link</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+    </div>
+
+    <!-- <div class="row">
+    <div class="col s12 m6">
+      <div class="card">
+        <div class="card-image" id="user-image">
+
+          <span class="card-title">Card Title</span>
+          <a class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">add</i></a>
+        </div>
+        <div class="card-content">
+          <p>I am a very simple card. I am good at containing small bits of information. I am convenient because I require little markup to use effectively.</p>
+        </div>
+      </div>
+    </div>
+  </div> -->
+    <div id="main">
+        <div id="welcome">
+        </div>
+
+        <!-- <div id="header">
+            <p id="mp1">
+            </p>
+        </div> -->
+        <h4 style="font-family: 'Anton', sans-serif; text-align: center; color: #00AA8D">Scan the QR code</h4>
+        <div id="mainbody">
+            <table class="tsel" border="0" width="100%">
+                <tr>
+                    <td valign="top" align="center" width="50%">
+                        <table class="tsel" border="0">
+                            <tr style="display:none">
+                                <td><img class="selector" id="webcamimg" src="vid.png" onclick="setwebcam()" align="left" /></td>
+                                <td><img class="selector" id="qrimg" src="cam.png" onclick="setimg()" align="right" /></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2" align="center">
+                                    <div id="outdiv">
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center" style="display: none;">
+                        <img src="down.png" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3" align="center" style="display: none">
+                        <div id="result"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div id="jsonData" style="display: none">
+
+
+    </div>
+    <!-- <div class="container  center-align" >
+      <div class="row">
+          <div class="col s12 m6">
+            <div class="card darken-1" style="background-color: #00AA8D">
+              <div class="card-content white-text">
+                <div class="row">
+                  <div class="col s6" style="border-right: 3px solid white">
+                    03
+                    <br>
+                    Queue Number
+                  </div>
+                  <div class="col s6">
+                    K16
+                    <br>
+                    Shop Number
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </div> -->
+
+    <canvas id="qr-canvas" width="800" height="600"></canvas>
+    <script type="text/javascript">
+    load();
+    </script>
+
+    <script type="text/javascript">
+      if (navigator.serviceWorker.controller) {
+        console.log('[PWA Builder] active service worker found, no need to register')
+      } else {
+        //Register the ServiceWorker
+        navigator.serviceWorker.register('pwabuilder-sw.js', {
+          scope: './'
+        }).then(function(reg) {
+          console.log('Service worker has been registered for scope:'+ reg.scope);
+        });
+      }
+    </script>
+    <script>
+    $(document).ready(function(){
+        console.log("The jQuery is working");
+    });
+
+
+    var flag =0;
+    function checkDiv()
+    {
+       var text = $( "#result" ).text();
+       console.log("Prev text = " + text);
+       if(text.length>0)
+       {
+         console.log("text is: " + text);
+         console.log("STOPPEDDDDD");
+
+         flag =1;
+         var nameSend = $( "#myNameG" ).text();
+         var mailSend =  $("#myMailG" ).text();
+           $.ajax({
+                   type: "GET",
+                   url: 'https://smartqlabs.com/main/api/mobile/scan.php',
+                   dataType: "jsonP",
+                   data : {
+                     "qr_data" : text,
+                     "email" : mailSend,
+                     "name" : nameSend
+                 },
+                   processdata: true
+               }).done(function (data) {
+                   console.log(data);
+                   $("#main").hide(1000);
+                   $("#jsonData").append('<div class="container center-align" > <div class="row"> <div class="col s12 m6"> <div class="card darken-1" style="background-color: #00AA8D"> <div class="card-content white-text"> <div class="row"> <div class="col s6" style="border-right: 3px solid white"> '  + data.queue.queue_no +  '<br> Queue Number </div> <div class="col s6">'   + data.queue.counter_id + ' <br> Shop Number </div> </div> </div> </div> </div> </div> </div>')
+                   $("#jsonData").show(100);
+
+                   console.log("Text is: " + text);
+                   console.log("Name Send value: " +  nameSend);
+                   console.log("Mail Send Value: " +  mailSend);
+               });
+       }
+       if(flag==1)
+       {
+         clearInterval(myTimer);
+       }
+    }
+    // console.log("The mailid is: " + email);
+    // console.log("The mailid is: " + userName);
+
+      var myTimer = setInterval('checkDiv()', 1000); // this will reload page after every 5 secounds; Method II
+
+    </script>
+<script type="text/javascript">
+
+</script>
+<script type="text/javascript">
+console.log("We are entering the script");
+
+
+
+
+</script>
+</body>
+</html>
